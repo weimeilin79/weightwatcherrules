@@ -35,19 +35,13 @@ then
 	String facttxt = new String( "Weightwatcher says that for " + $gas.getGoalname( ) + ", " + username + " attained best outcome " + 
 		$obscounttotal  + " times over the past 60 days" );
 
-    ObjectMapper mapper = new ObjectMapper();
-    ObjectNode node = mapper.createObjectNode();
-    node.put("userid", userid);
-    node.put("obsvalue", $obscounttotal.intValue());
-    node.put("facttxt", rulename);
-    System.out.println(node.toString());
-
+   
 	Fact $fact = new Fact( );
 	$fact.setFactid( 999 );
 	$fact.setFacttype ( 0 );
 	$fact.setFactname( factname );
 	$fact.setFacttxt( facttxt );
-	$fact.setFactjson( node.toString( ) );
+	$fact.setFactjson( "" );
 	insert( $fact );
 
    	System.out.println( "==>weightwatcher " + rulename + ":" + $obscounttotal );
@@ -76,19 +70,13 @@ then
 	String facttxt = new String( "Weightwatcher says that for " + $gas.getGoalname( ) + ", " + username + " attained expected outcome or better " + 
 		$obscounttotal  + " times over the past 60 days" );
 
-	ObjectMapper mapper = new ObjectMapper();
-    ObjectNode node = mapper.createObjectNode();
-    node.put("userid", userid);
-    node.put("obsvalue", $obscounttotal.intValue());
-    node.put("facttxt", rulename);
-    System.out.println(node.toString());
 
 	Fact $fact = new Fact( );
 	$fact.setFactid( 999 );
 	$fact.setFacttype ( 0 );
 	$fact.setFactname( factname );
 	$fact.setFacttxt( facttxt );
-	$fact.setFactjson( node.toString( ) );
+	$fact.setFactjson( "" );
 	insert( $fact );
 
    	System.out.println( "==>weightwatcher" + rulename + ":" + $obscounttotal );
