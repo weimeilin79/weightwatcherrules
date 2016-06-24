@@ -1,5 +1,7 @@
 package com.redhat.weightwatcher;
 
+import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.map.ObjectMapper;
 
 import java.util.Date; 
 import java.text.SimpleDateFormat;
@@ -29,13 +31,19 @@ then
 	String facttxt = new String( "Weightwatcher says that " + username + " WEIGHT averaged " + 
 	String.format( "%.2f", $obsvalueaverage ) + " over the past 7 days" );
 
+	ObjectMapper mapper = new ObjectMapper();
+    ObjectNode node = mapper.createObjectNode();
+    node.put("userid", userid);
+    node.put("obsvalue", $obsvalueaverage.doubleValue());
+    node.put("facttxt", rulename);
+    System.out.println(node.toString());
 
 	Fact $fact = new Fact( );
 	$fact.setFactid( 999 );
 	$fact.setFacttype ( 0 );
 	$fact.setFactname( factname );
 	$fact.setFacttxt( facttxt );
-	$fact.setFactjson("");
+	$fact.setFactjson(node.toString());
 	insert( $fact );
 
    	System.out.println( "==>weightwatcher " + rulename + ":" + $obsvalueaverage );
@@ -62,12 +70,19 @@ then
 	String facttxt = new String( "Weightwatcher says that " + username + " WEIGHT maximum was " + 
 	String.format( "%.2f", $obsvaluehigh ) + " over the past 30 days" );
 
+	ObjectMapper mapper = new ObjectMapper();
+    ObjectNode node = mapper.createObjectNode();
+    node.put("userid", userid);
+    node.put("obsvalue", $obsvaluehigh.doubleValue());
+    node.put("facttxt", rulename);
+    System.out.println(node.toString());
+
 	Fact $fact = new Fact( );
 	$fact.setFactid( 999 );
 	$fact.setFacttype ( 0 );
 	$fact.setFactname( factname );
 	$fact.setFacttxt( facttxt );
-	$fact.setFactjson( "" );
+	$fact.setFactjson( node.toString( ) );
 	insert( $fact );
 
    	System.out.println( "==>weightwatcher " + rulename + ":" + $obsvaluehigh );
@@ -99,13 +114,19 @@ then
 	String facttxt = new String( "Weightwatcher says that " + username + " WEIGHT change was " + 
 	String.format( "%.2f", $percentchange ) + "% over the past 30 days" );
 
+	ObjectMapper mapper = new ObjectMapper();
+    ObjectNode node = mapper.createObjectNode();
+    node.put("userid", userid);
+    node.put("obsvalue", $percentchange.doubleValue() );
+    node.put("facttxt", rulename);
+    System.out.println(node.toString());
 
 	Fact $fact = new Fact( );
 	$fact.setFactid( 999 );
 	$fact.setFacttype ( 0 );
 	$fact.setFactname( factname );
 	$fact.setFacttxt( facttxt );
-	$fact.setFactjson( "" );
+	$fact.setFactjson( node.toString( ) );
 	insert( $fact );
 
    	System.out.println( "==>weightwatcher " + rulename + ":" + $percentchange );

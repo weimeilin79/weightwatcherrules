@@ -1,6 +1,7 @@
 package com.redhat.weightwatcher;
 
-
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.JsonNode;
 import java.util.Date; 
 import java.text.SimpleDateFormat;
 import com.redhat.weightwatcher.Observation;
@@ -10,12 +11,13 @@ rule "ruleInsertObservation"
 when
     fact : Fact( factname == "Observation" )
 then
-    
-    Integer userid = "ABC";
+    ObjectMapper mapper = new ObjectMapper();
+    JsonNode node = mapper.readTree(fact.getFactjson( ).toString( ));
+    Integer userid = node.get("userid").getIntValue();
     SimpleDateFormat factSDF = new SimpleDateFormat("yyyy-M-d HH:mm:ss zzz");
-    Date obsdate = factSDF.parse( "2016-05-23 12:67:55 EST" );
-    Integer obsvalue = 92;
-    String obsname = "weight";
+    Date obsdate = factSDF.parse( node.get("obsdate").getTextValue());
+    Integer obsvalue = node.get("obsvalue").getIntValue();
+    String obsname = node.get( "obsname" ).getTextValue();
 
     Observation observation = new Observation( );
     observation.setUserid( userid );
