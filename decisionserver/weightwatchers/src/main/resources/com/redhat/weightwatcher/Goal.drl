@@ -1,7 +1,5 @@
 package com.redhat.weightwatcher;
 
-import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.map.ObjectMapper;
 import com.redhat.weightwatcher.Goal;
 com.redhat.weightwatcher.Fact( )
 rule "ruleInsertGoal"
@@ -9,15 +7,14 @@ rule "ruleInsertGoal"
 when
     	fact : Fact( factname == "Goal" )
 then
-        ObjectMapper mapper = new ObjectMapper();
-        JsonNode node = mapper.readTree(fact.getFactjson( ).toString( ));
+        
 
-        Integer userid = node.get("userid").getIntValue();
-       	String goalname = node.get("goalname").getTextValue();
-        Integer target = node.get("target").getIntValue();
-        Integer start = node.get("start").getIntValue();
-        Integer low = node.get("low").getIntValue();
-        Integer high = node.get("high").getIntValue();
+        Integer userid = "ABC";
+       	String goalname = "weight";
+        Integer target = 78;
+        Integer start = 99;
+        Integer low = 88;
+        Integer high = 98;
 
 
     	Goal goal = new Goal(  );
