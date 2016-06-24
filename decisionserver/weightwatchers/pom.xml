@@ -28,22 +28,8 @@
         <maven.compiler.source>1.8</maven.compiler.source>
     </properties>
     
-    <repositories>
-	    <repository>
-	      <releases>
-	        <enabled>true</enabled>
-	      </releases>
-	      <snapshots>
-	        <enabled>false</enabled>
-	      </snapshots>
-	      <id>ga.redhat.com</id>
-	      <name>General availability repository</name>
-	      <url>https://maven.repository.redhat.com/ga/</url>
-	    </repository>
-  	</repositories>
     
-     <dependencies>
-    
+    <dependencies>
     <!-- kie/drools/jbpm -->
     <dependency>
       <groupId>org.kie</groupId>
@@ -61,5 +47,19 @@
       <version>6.2.0.Final-redhat-4</version>
     </dependency>
   </dependencies>
+  
+  <repositories>
+	    <repository>
+	      <releases>
+	        <enabled>true</enabled>
+	      </releases>
+	      <snapshots>
+	        <enabled>false</enabled>
+	      </snapshots>
+	      <id>ga.redhat.com</id>
+	      <name>General availability repository</name>
+	      <url>https://maven.repository.redhat.com/ga/</url>
+	    </repository>
+  	</repositories>
 
 </project>
